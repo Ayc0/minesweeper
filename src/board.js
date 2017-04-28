@@ -137,14 +137,14 @@ export default class Board {
     this.displayBoard[x][y] = nbBombsNB;
     if (nbBombsNB === 0) {
       // Propagate the reveal
-      this.reveal(x - 1, y - 1);
-      this.reveal(x - 1, y);
-      this.reveal(x - 1, y + 1);
-      this.reveal(x, y - 1);
-      this.reveal(x, y + 1);
-      this.reveal(x + 1, y - 1);
-      this.reveal(x + 1, y);
-      this.reveal(x + 1, y + 1);
+      await this.reveal(x - 1, y - 1);
+      await this.reveal(x - 1, y);
+      await this.reveal(x - 1, y + 1);
+      await this.reveal(x, y - 1);
+      await this.reveal(x, y + 1);
+      await this.reveal(x + 1, y - 1);
+      await this.reveal(x + 1, y);
+      await this.reveal(x + 1, y + 1);
     }
     return nbBombsNB;
   }
