@@ -156,4 +156,19 @@ export default class Board {
   */ get allRevealed() {
     return this.nbRevealedTiles + this.nbBombs === this.width * this.height;
   }
+  async toggleFlag(x, y) {
+    switch (this.displayBoard[x][y]) {
+      case null:
+        this.displayBoard[x][y] = -2;
+        return -2;
+      case -2:
+        this.displayBoard[x][y] = -3;
+        return -3;
+      case -3:
+        this.displayBoard[x][y] = null;
+        return null;
+      default:
+        return this.displayBoard[x][y];
+    }
+  }
 }

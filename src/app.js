@@ -26,11 +26,11 @@ export default class App extends Component {
     });
   }
   handleDblClick() {
-    console.log('double click');
+    console.log('double clic');
   }
-  handleRightClick(e) {
+  handleRightClick(e, x, y) {
     e.preventDefault();
-    console.log('right click');
+    this.board.toggleFlag(x, y).then(this.forceUpdate());
   }
   render() {
     let x = -1;
@@ -43,9 +43,14 @@ export default class App extends Component {
           {row.map(() => {
             y += 1;
             return (
-              <Tile onClick={this.handleClick} key={[x, y]} x={x} y={y}>
-                {this.board.displayBoard[x][y]}
-              </Tile>
+              <Tile
+                onClick={this.handleClick}
+                onContextMenu={this.handleRightClick}
+                key={[x, y]}
+                x={x}
+                y={y}
+                value={this.board.displayBoard[x][y]}
+              />
             );
           })}
         </div>
