@@ -7,18 +7,23 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { board: {} };
+
     this.handleClick = this.handleClick.bind(this);
     this.handleDblClick = this.handleDblClick.bind(this);
     this.handleRightClick = this.handleRightClick.bind(this);
   }
   componentWillMount() {
-    this.board = new Board(5, 5, 4);
-    this.board.reveal(0, 0).then(console.log);
+    const board = new Board(25, 25, 10);
+    this.board = board;
+    this.setState(() => ({ board: board.displayBoard }));
   }
-  handleClick() {
-    this.board.reveal(0, 2).then(v => {
-      console.log(v);
-      console.log(this.board.rawDisplayBoard);
+  handleClick(x, y) {
+    this.board.reveal(x, y).then(board => {
+      console.log(board);
+      this.setState(() => ({
+        board,
+      }));
     });
   }
   handleDblClick() {
@@ -29,14 +34,25 @@ export default class App extends Component {
     console.log('right click');
   }
   render() {
-    return (
-      <div>
-        <Tile
-          onClick={this.handleClick}
-          onDoubleClick={this.handleDblClick}
-          onContextMenu={this.handleRightClick}
-        />
-      </div>
-    );
+    let x = -1;
+    let y;
+    const displayBoard = this.state.board.map(row => {
+      y = -1;
+      x += 1;
+      return (
+        <div style={{ display: 'flex', flexDirection: 'row' }} key={x}>
+          {row.map(() => {
+            y += 1;
+            return (
+              <Tile onClick={this.handleClick} key={[x, y]} x={x} y={y}>
+                {this.state.board[x][y]}
+              </Tile>
+            );
+          })}
+        </div>
+      );
+    });
+
+    return <div>{displayBoard}</div>;
   }
 }

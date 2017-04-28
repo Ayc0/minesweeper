@@ -57,7 +57,7 @@ export default class Board {
   * @param {Number} y
   */
   populate(x, y) {
-    if (x < 0 || x > this.width || y < 0 || y > this.height) {
+    if (x < 0 || x >= this.width || y < 0 || y >= this.height) {
       return;
     }
     if (!this.populated) {
@@ -72,7 +72,6 @@ export default class Board {
           currentBomb += 1;
         }
       }
-      console.log(this.rawBoard);
       this.populated = true;
     }
   }
@@ -85,21 +84,22 @@ export default class Board {
   * @returns {Number}
   */
   check(x, y) {
-    if (x < 0 || x > this.width || y < 0 || y > this.height) {
+    if (x < 0 || x >= this.width || y < 0 || y >= this.height) {
       return 0;
     }
     return this.board[x][y];
   }
 
   /**
-  * Reveal the box with coordinates (x, y) and return either
+  * Reveal the box with coordinates (x, y)
+  * and complete the displayBoard with :
   * • NaN if (x, y) if outside of the board
   * • -1 if their is a bomb
   * • a number between 0 and 8 corresponding to the number of bombs nearby
   * Also populate the board if not done already
   * @param {Number} x
   * @param {Number} y
-  * @returns {Number}
+  * @returns {Object}
   */ async reveal(
     x,
     y
@@ -108,18 +108,18 @@ export default class Board {
       // Populate if necessary
       await this.populate(x, y);
     }
-    if (x < 0 || x > this.width || y < 0 || y > this.height) {
+    if (x < 0 || x >= this.width || y < 0 || y >= this.height) {
       // Outside of the box
-      return NaN;
+      return this.displayBoard;
     }
     if (this.displayBoard[x][y] !== null) {
       // Already discovered
-      return this.displayBoard[x][y];
+      return this.displayBoard;
     }
     if (this.board[x][y]) {
       // Bomb
       this.displayBoard[x][y] = -1;
-      return -1;
+      return this.displayBoard;
     }
     const nbBombsNB = // Number of bombs nearby
       this.check(x - 1, y - 1) +
@@ -142,6 +142,6 @@ export default class Board {
       this.reveal(x + 1, y);
       this.reveal(x + 1, y + 1);
     }
-    return nbBombsNB;
+    return this.displayBoard;
   }
 }
