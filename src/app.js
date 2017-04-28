@@ -7,23 +7,20 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { board: {} };
-
     this.handleClick = this.handleClick.bind(this);
     this.handleDblClick = this.handleDblClick.bind(this);
     this.handleRightClick = this.handleRightClick.bind(this);
   }
   componentWillMount() {
-    const board = new Board(25, 25, 10);
+    const board = new Board(10, 10, 10);
     this.board = board;
-    this.setState(() => ({ board: board.displayBoard }));
   }
   handleClick(x, y) {
-    this.board.reveal(x, y).then(board => {
-      console.log(board);
-      this.setState(() => ({
-        board,
-      }));
+    this.board.reveal(x, y).then(value => {
+      this.forceUpdate();
+      if (value === -1) {
+        alert('Perdu');
+      }
     });
   }
   handleDblClick() {
@@ -36,7 +33,7 @@ export default class App extends Component {
   render() {
     let x = -1;
     let y;
-    const displayBoard = this.state.board.map(row => {
+    const displayBoard = this.board.displayBoard.map(row => {
       y = -1;
       x += 1;
       return (
@@ -45,7 +42,7 @@ export default class App extends Component {
             y += 1;
             return (
               <Tile onClick={this.handleClick} key={[x, y]} x={x} y={y}>
-                {this.state.board[x][y]}
+                {this.board.displayBoard[x][y]}
               </Tile>
             );
           })}

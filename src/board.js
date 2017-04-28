@@ -108,18 +108,20 @@ export default class Board {
       // Populate if necessary
       await this.populate(x, y);
     }
-    if (x < 0 || x >= this.width || y < 0 || y >= this.height) {
-      // Outside of the box
-      return this.displayBoard;
-    }
-    if (this.displayBoard[x][y] !== null) {
-      // Already discovered
-      return this.displayBoard;
+    if (
+      x < 0 ||
+      x >= this.width ||
+      y < 0 ||
+      y >= this.height ||
+      this.displayBoard[x][y] !== null
+    ) {
+      // Outside of the box or already discovered
+      return null;
     }
     if (this.board[x][y]) {
       // Bomb
       this.displayBoard[x][y] = -1;
-      return this.displayBoard;
+      return -1;
     }
     const nbBombsNB = // Number of bombs nearby
       this.check(x - 1, y - 1) +
@@ -142,6 +144,6 @@ export default class Board {
       this.reveal(x + 1, y);
       this.reveal(x + 1, y + 1);
     }
-    return this.displayBoard;
+    return nbBombsNB;
   }
 }
