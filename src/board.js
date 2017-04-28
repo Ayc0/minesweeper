@@ -112,7 +112,7 @@ export default class Board {
       // Outside of the box
       return NaN;
     }
-    if (this.displayBoard[x][y]) {
+    if (this.displayBoard[x][y] !== null) {
       // Already discovered
       return this.displayBoard[x][y];
     }
@@ -131,6 +131,17 @@ export default class Board {
       this.check(x + 1, y) +
       this.check(x + 1, y + 1);
     this.displayBoard[x][y] = nbBombsNB;
+    if (nbBombsNB === 0) {
+      // Propagate the reveal
+      this.reveal(x - 1, y - 1);
+      this.reveal(x - 1, y);
+      this.reveal(x - 1, y + 1);
+      this.reveal(x, y - 1);
+      this.reveal(x, y + 1);
+      this.reveal(x + 1, y - 1);
+      this.reveal(x + 1, y);
+      this.reveal(x + 1, y + 1);
+    }
     return nbBombsNB;
   }
 }
