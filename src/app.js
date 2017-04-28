@@ -12,12 +12,14 @@ export default class App extends Component {
     this.handleRightClick = this.handleRightClick.bind(this);
   }
   componentWillMount() {
-    const board = new Board(10, 10, 10);
-    this.board = board;
+    this.board = new Board(10, 10, 3);
   }
   handleClick(x, y) {
     this.board.reveal(x, y).then(value => {
       this.forceUpdate();
+      if (this.board.allRevealed) {
+        alert('Gagné');
+      }
       if (value === -1) {
         alert('Perdu');
       }
@@ -49,7 +51,6 @@ export default class App extends Component {
         </div>
       );
     });
-
     return <div>{displayBoard}</div>;
   }
 }

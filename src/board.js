@@ -40,6 +40,7 @@ export default class Board {
     this.displayBoard = deepCopy(displayBoard);
 
     this.populated = false;
+    this.nbRevealedTiles = 0;
   }
 
   /**
@@ -93,7 +94,7 @@ export default class Board {
   }
 
   /**
-  * Reveal the box with coordinates (x, y)
+  * Reveal the tile with coordinates (x, y)
   * and complete the displayBoard with :
   * • NaN if (x, y) if outside of the board
   * • -1 if their is a bomb
@@ -117,7 +118,7 @@ export default class Board {
       y >= this.height ||
       this.displayBoard[x][y] !== null
     ) {
-      // Outside of the box or already discovered
+      // Outside of the board or already discovered
       return null;
     }
     if (this.board[x][y]) {
@@ -135,6 +136,7 @@ export default class Board {
       this.check(x + 1, y) +
       this.check(x + 1, y + 1);
     this.displayBoard[x][y] = nbBombsNB;
+    this.nbRevealedTiles += 1;
     if (nbBombsNB === 0) {
       // Propagate the reveal
       await this.reveal(x - 1, y - 1);
@@ -147,5 +149,11 @@ export default class Board {
       await this.reveal(x + 1, y + 1);
     }
     return nbBombsNB;
+  }
+  /**
+  * Check if all tiles are revealed
+  * returns {Boolean}
+  */ get allRevealed() {
+    return this.nbRevealedTiles + this.nbBombs === this.width * this.height;
   }
 }
