@@ -17,7 +17,7 @@ const StyledTile = styled('div', () => ({
 
 const Tile = props => (
   <StyledTile onClick={() => props.onClick(props.x, props.y)}>
-    {props.children}
+    {props.children || null}
   </StyledTile>
 );
 
