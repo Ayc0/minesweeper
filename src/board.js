@@ -22,11 +22,13 @@ export default class Board {
   */
   constructor(width, height, nbBombs) {
     this.width = width > 0 ? width : 0;
+    this.width = this.width > 24 ? 24 : this.width;
 
     this.height = height > 0 ? height : 0;
+    this.width = this.height > 30 ? 30 : this.height;
 
-    this.nbBombs = nbBombs > (width - 1) * (height - 1)
-      ? (width - 1) * (height - 1)
+    this.nbBombs = nbBombs > (this.width - 1) * (this.height - 1)
+      ? (this.width - 1) * (this.height - 1)
       : nbBombs;
     this.nbBombs = this.nbBombs > 0 ? this.nbBombs : 0;
 
