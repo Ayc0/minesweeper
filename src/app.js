@@ -18,10 +18,10 @@ export default class App extends Component {
     this.board.reveal(x, y).then(value => {
       this.forceUpdate();
       if (this.board.allRevealed) {
-        alert('Gagné');
+        console.log('Gagné');
       }
       if (value === -1) {
-        alert('Perdu');
+        console.log('Perdu');
       }
     });
   }
