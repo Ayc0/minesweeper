@@ -7,7 +7,8 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "styletron-client": "^2.5.7",
-    "styletron-react": "^2.5.7"
+    "styletron-react": "^2.5.7",
+    "svg.js": "^2.6.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

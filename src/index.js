@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Styletron from 'styletron-client';
 import { StyletronProvider } from 'styletron-react';
 
-import App from './app';
+import App from './components/app';
 
 const styletron = new Styletron();
 
