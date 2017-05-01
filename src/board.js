@@ -139,16 +139,65 @@ export default class Board {
     this.nbRevealedTiles += 1;
     if (nbBombsNB === 0) {
       // Propagate the reveal
-      await this.reveal(x - 1, y - 1);
-      await this.reveal(x - 1, y);
-      await this.reveal(x - 1, y + 1);
-      await this.reveal(x, y - 1);
-      await this.reveal(x, y + 1);
-      await this.reveal(x + 1, y - 1);
-      await this.reveal(x + 1, y);
-      await this.reveal(x + 1, y + 1);
+      await this.revealCircle(x, y);
     }
     return nbBombsNB;
+  }
+  /**
+  * Reveal the tiles surrounding the coordinates (x, y)
+  * @param {Number} x
+  * @param {Number} y
+  */ async revealCircle(
+    x,
+    y
+  ) {
+    const results = [];
+    await this.reveal(x - 1, y - 1).then(v => results.push(v));
+    await this.reveal(x - 1, y).then(v => results.push(v));
+    await this.reveal(x - 1, y + 1).then(v => results.push(v));
+    await this.reveal(x, y - 1).then(v => results.push(v));
+    await this.reveal(x, y + 1).then(v => results.push(v));
+    await this.reveal(x + 1, y - 1).then(v => results.push(v));
+    await this.reveal(x + 1, y).then(v => results.push(v));
+    await this.reveal(x + 1, y + 1).then(v => results.push(v));
+    return results;
+  }
+  /**
+  * Check if there is a flag in the tile with coordinates (x, y)
+  * @param {Number} x
+  * @param {Number} y
+  * @returns {Bool}
+  */ checkFlag(
+    x,
+    y
+  ) {
+    if (x < 0 || x >= this.width || y < 0 || y >= this.height) {
+      return false;
+    }
+    return this.displayBoard[x][y] === -2;
+  }
+  async revealCircleSecure(x, y) {
+    if (this.displayBoard[x][y] <= 0) {
+      return 0;
+    }
+    const nbFlagsNB = // Number of bombs nearby
+      this.checkFlag(x - 1, y - 1) +
+      this.checkFlag(x - 1, y) +
+      this.checkFlag(x - 1, y + 1) +
+      this.checkFlag(x, y - 1) +
+      this.checkFlag(x, y + 1) +
+      this.checkFlag(x + 1, y - 1) +
+      this.checkFlag(x + 1, y) +
+      this.checkFlag(x + 1, y + 1);
+    let bomb = false;
+    if (nbFlagsNB === this.displayBoard[x][y]) {
+      await this.revealCircle(x, y).then(results => {
+        if (results.filter(v => v === -1).length > 0) {
+          bomb = true;
+        }
+      });
+    }
+    return bomb;
   }
   /**
   * Check if all tiles are revealed
@@ -156,7 +205,15 @@ export default class Board {
   */ get allRevealed() {
     return this.nbRevealedTiles + this.nbBombs === this.width * this.height;
   }
-  async toggleFlag(x, y) {
+  /** 
+  * Circle between empty, flag and question mark the tile with
+  * coordinates (x, y)
+  * @param {Number} x
+  * @param {Number} y
+  */ async toggleFlag(
+    x,
+    y
+  ) {
     switch (this.displayBoard[x][y]) {
       case null:
         this.displayBoard[x][y] = -2;

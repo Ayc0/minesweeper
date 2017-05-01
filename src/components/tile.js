@@ -23,6 +23,7 @@ const Tile = props => (
   <StyledTile
     onClick={() => props.onClick(props.x, props.y)}
     onContextMenu={e => props.onContextMenu(e, props.x, props.y)}
+    onDoubleClick={() => props.onDoubleClick(props.x, props.y)}
     value={props.value}
   >
     {props.value > 0 ? props.value : null}
@@ -34,6 +35,8 @@ const Tile = props => (
 
 Tile.propTypes = {
   onClick: PropTypes.func.isRequired,
+  onContextMenu: PropTypes.func.isRequired,
+  onDoubleClick: PropTypes.func.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
   value: PropTypes.number,

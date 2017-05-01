@@ -29,16 +29,24 @@ export default class Minesweeper extends Component {
   handleClick(x, y) {
     this.board.reveal(x, y).then(value => {
       this.forceUpdate();
-      if (this.board.allRevealed) {
-        this.props.onWin();
-      }
       if (value === -1) {
         this.props.onLoose();
       }
+      if (this.board.allRevealed) {
+        this.props.onWin();
+      }
     });
   }
-  handleDblClick() {
-    console.log('double clic');
+  handleDblClick(x, y) {
+    this.board.revealCircleSecure(x, y).then(bomb => {
+      this.forceUpdate();
+      if (bomb) {
+        this.props.onLoose();
+      }
+      if (this.board.allRevealed) {
+        this.props.onWin();
+      }
+    });
   }
   handleRightClick(e, x, y) {
     e.preventDefault();
@@ -58,6 +66,7 @@ export default class Minesweeper extends Component {
               <Tile
                 onClick={this.handleClick}
                 onContextMenu={this.handleRightClick}
+                onDoubleClick={this.handleDblClick}
                 key={[x, y]}
                 x={x}
                 y={y}
