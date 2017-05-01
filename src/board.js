@@ -25,7 +25,7 @@ export default class Board {
     this.width = this.width > 24 ? 24 : this.width;
 
     this.height = height > 0 ? height : 0;
-    this.width = this.height > 30 ? 30 : this.height;
+    this.height = this.height > 30 ? 30 : this.height;
 
     this.nbBombs = nbBombs > (this.width - 1) * (this.height - 1)
       ? (this.width - 1) * (this.height - 1)

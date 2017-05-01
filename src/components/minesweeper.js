@@ -12,7 +12,11 @@ export default class Minesweeper extends Component {
     this.handleRightClick = this.handleRightClick.bind(this);
   }
   componentWillMount() {
-    this.board = new Board(10, 10, 3);
+    this.board = new Board(
+      this.props.width,
+      this.props.height,
+      this.props.bombs
+    );
   }
   handleClick(x, y) {
     this.board.reveal(x, y).then(value => {

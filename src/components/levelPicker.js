@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { styled } from 'styletron-react';
 
 import Level from './level';
@@ -22,20 +22,16 @@ const Title = styled('h1', () => ({
   marginBottom: '16px',
 }));
 
-class LevelPicker extends Component {
-  render() {
-    return (
-      <Container>
-        <Title>Choose a level</Title>
-        <div>
-          <Level level="easy" />
-          <Level level="medium" />
-          <Level level="hard" />
-          <Level level="custom" />
-        </div>
-      </Container>
-    );
-  }
-}
+const LevelPicker = props => (
+  <Container>
+    <Title>Choose a level</Title>
+    <div>
+      <Level level="easy" start={props.start} />
+      <Level level="medium" start={props.start} />
+      <Level level="hard" start={props.start} />
+      <Level level="custom" start={props.start} />
+    </div>
+  </Container>
+);
 
 export default LevelPicker;
