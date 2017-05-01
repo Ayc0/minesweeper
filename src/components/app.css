@@ -1,0 +1,22 @@
+.game-menu-enter {
+  top: calc(50vh - 50%);
+  opacity: 0;
+  transition: transform 500ms ease-out 250ms, opacity 500ms ease-out 250ms;
+}
+
+.game-menu-enter.game-menu-enter-active {
+  left: 100vw;
+  opacity: 1;
+  transform: translate(calc(-50vw - 50%), -50%);
+}
+
+.game-menu-leave {
+  top: calc(50vh - 50%);
+  opacity: 1;
+  transition: transform 500ms ease-out, opacity 500ms ease-out;
+}
+
+.game-menu-leave.game-menu-leave-active {
+  transform: translate(calc(-50vw - 100%), -50%);
+  opacity: 0;
+}

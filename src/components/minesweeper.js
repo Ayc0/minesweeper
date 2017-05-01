@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import { styled } from 'styletron-react';
 
 import Tile from './tile';
 import Board from '../board';
+
+const Container = styled('div', () => ({
+  position: 'absolute',
+  left: '50vw',
+  top: '50vh',
+  transform: 'translate(-50%, -50%)',
+}));
 
 export default class Minesweeper extends Component {
   constructor(props) {
@@ -22,10 +30,10 @@ export default class Minesweeper extends Component {
     this.board.reveal(x, y).then(value => {
       this.forceUpdate();
       if (this.board.allRevealed) {
-        console.log('Gagné');
+        this.props.onWin();
       }
       if (value === -1) {
-        console.log('Perdu');
+        this.props.onLoose();
       }
     });
   }
@@ -61,11 +69,9 @@ export default class Minesweeper extends Component {
       );
     });
     return (
-      <div>
-        <div>
-          {displayBoard}
-        </div>
-      </div>
+      <Container>
+        {displayBoard}
+      </Container>
     );
   }
 }

@@ -4,11 +4,12 @@ import { styled } from 'styletron-react';
 import Level from './level';
 
 const Container = styled('div', () => ({
-  position: 'relative',
+  position: 'absolute',
   backgroundColor: 'rgba(255, 255, 255, 0.9)',
   top: '50vh',
   left: '50vw',
   maxWidth: '400px',
+  width: '100%',
   transform: 'translate(calc(-50% - 8px), -50%)',
   borderRadius: '4px',
   padding: '8px',

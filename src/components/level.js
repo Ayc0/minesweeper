@@ -125,7 +125,7 @@ export default class Level extends Component {
         break;
       case 'custom':
         this.backgroundColor = '#e39f27';
-        this.setState(() => ({ width: 16, height: 16, bombs: 40 }));
+        this.setState(() => ({ width: 16, height: 16, bombs: 1 }));
         break;
       default:
         this.backgroundColor = '';
