@@ -1,5 +1,6 @@
 import React from 'react';
 
-import Minesweeper from './minesweeper';
+// import Minesweeper from './minesweeper';
+import LevelPicker from './levelPicker';
 
-export default () => <Minesweeper />;
+export default () => <LevelPicker />;

@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import Styletron from 'styletron-client';
 import { StyletronProvider } from 'styletron-react';
 
+import 'font-awesome/css/font-awesome.css';
+
 import App from './components/app';
 
 const styletron = new Styletron();
