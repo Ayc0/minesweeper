@@ -20,7 +20,7 @@ const Fa = styled(FA, () => ({
     alignItems: 'flex-start',
   },
   color: '#a04c31',
-  width: '25%',
+  width: '50%',
 }));
 
 export default class Menu extends Component {
@@ -38,11 +38,16 @@ export default class Menu extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.stop !== this.props.stop && nextProps.stop) {
+      this.props.getEndTime(this.state.i);
+      clearInterval(this.interval);
+    }
+  }
   render() {
     return (
       <Wrapper>
-        <Fa name="times" />
-        <Fa name="undo" />
+        <Fa name="times" onClick={this.props.onStop} />
         <Progress
           size={38}
           margin={3}

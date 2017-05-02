@@ -16,16 +16,10 @@ class App extends Component {
       bombs: 0,
     };
 
-    this.onWin = this.onWin.bind(this);
-    this.onLoose = this.onLoose.bind(this);
+    this.onStop = this.onStop.bind(this);
   }
-  onWin() {
+  onStop() {
     this.setState(() => ({ start: false }));
-    console.log('Gagné');
-  }
-  onLoose() {
-    this.setState(() => ({ start: false }));
-    console.log('Perdu');
   }
   render() {
     return (
@@ -40,8 +34,7 @@ class App extends Component {
                 height={this.state.height}
                 width={this.state.width}
                 bombs={this.state.bombs}
-                onWin={this.onWin}
-                onLoose={this.onLoose}
+                onStop={this.onStop}
                 key="gameWrapper"
               />
             : <LevelPicker
