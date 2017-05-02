@@ -28,20 +28,29 @@ export default class Menu extends Component {
     super(props);
 
     this.state = { i: 0 };
+
+    this.detectEscape = this.detectEscape.bind(this);
   }
   componentDidMount() {
     this.interval = setInterval(
       () => this.setState(prevState => ({ i: prevState.i + 1 })),
       1000
     );
+    addEventListener('keyup', this.detectEscape);
   }
   componentWillUnmount() {
     clearInterval(this.interval);
+    removeEventListener('keyup', this.detectEscape);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.stop !== this.props.stop && nextProps.stop) {
       this.props.getEndTime(this.state.i);
       clearInterval(this.interval);
+    }
+  }
+  detectEscape(event) {
+    if (event.keyCode === 27) {
+      this.props.onStop();
     }
   }
   render() {
