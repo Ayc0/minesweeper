@@ -12,3 +12,23 @@ But it's highly recommended to use [yarn](https://yarnpkg.com).
 
 - Run: `yarn start` (or `npm start`)
 - Build in prod version: `yarn build` (or `npm run build`)
+
+## Structure
+- `board.js` contains the logic of the game and the other files the visual
+
+```
+index.js
+  app.js (& app.css)
+    levelPicker.js
+      level.js (easy)
+      level.js (medium)
+      level.js (hard)
+      level.js (custom)
+   gameWrapper.js
+     menu.js
+       progress.js (min)
+       progress.js (sec)
+     minesweeper.js
+       ../board.js (logic)
+       tile.js (multiple)
+```
