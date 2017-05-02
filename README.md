@@ -14,8 +14,9 @@ But it's highly recommended to use [yarn](https://yarnpkg.com).
 - Build in prod version: `yarn build` (or `npm run build`)
 
 ## Structure
-- `board.js` contains the logic of the game and the other files the visual
+The file `board.js` contains the logic of the game and the other files the visual.
 
+Here is the structure and the dependencies between files :
 ```
 index.js
   app.js (& app.css)
