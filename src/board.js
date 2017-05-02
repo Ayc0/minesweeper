@@ -41,6 +41,7 @@ export default class Board {
 
     this.populated = false;
     this.nbRevealedTiles = 0;
+    this.nbFlags = 0;
   }
 
   /**
@@ -217,9 +218,11 @@ export default class Board {
     switch (this.displayBoard[x][y]) {
       case null:
         this.displayBoard[x][y] = -2;
+        this.nbFlags += 1;
         return -2;
       case -2:
         this.displayBoard[x][y] = -3;
+        this.nbFlags -= 1;
         return -3;
       case -3:
         this.displayBoard[x][y] = null;

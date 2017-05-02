@@ -71,6 +71,17 @@ export default class Minesweeper extends Component {
     });
     return (
       <div>
+        <span
+          style={{
+            position: 'absolute',
+            top: '10px',
+            left: '50px',
+            fontSize: '32px',
+            color: '#a04c31',
+          }}
+        >
+          {this.board.nbBombs - this.board.nbFlags}
+        </span>
         {displayBoard}
       </div>
     );
