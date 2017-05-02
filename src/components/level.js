@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { styled } from 'styletron-react';
 import Fa from 'react-fontawesome';
 import Color from 'color';
+import PropTypes from 'prop-types';
 
 const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -21,6 +22,14 @@ const Container = styled('div', props => ({
   paddingLeft: '8px',
   paddingRight: '8px',
 }));
+
+Container.propTypes = {
+  color: PropTypes.string,
+};
+
+Container.defaultProps = {
+  color: 'white',
+};
 
 const Difficulty = styled('h2', () => ({
   alignSelf: 'flex-start',
@@ -95,7 +104,12 @@ const PickArrows = props => (
   </Arrows>
 );
 
-export default class Level extends Component {
+PickArrows.propTypes = {
+  onPlus: PropTypes.func.isRequired,
+  onMinus: PropTypes.func.isRequired,
+};
+
+class Level extends Component {
   constructor(props) {
     super(props);
 
@@ -128,7 +142,7 @@ export default class Level extends Component {
         this.setState(() => ({ width: 16, height: 16, bombs: 1 }));
         break;
       default:
-        this.backgroundColor = '';
+        this.backgroundColor = 'white';
         break;
     }
   }
@@ -207,3 +221,10 @@ export default class Level extends Component {
     );
   }
 }
+
+Level.propTypes = {
+  level: PropTypes.string.isRequired,
+  start: PropTypes.func.isRequired,
+};
+
+export default Level;

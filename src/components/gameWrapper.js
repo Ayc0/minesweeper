@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { styled } from 'styletron-react';
 import Fa from 'react-fontawesome';
 import Color from 'color';
+import PropTypes from 'prop-types';
 
 import Menu from './menu';
 import Minesweeper from './minesweeper';
@@ -64,7 +65,17 @@ const Button = styled('button', props => ({
   float: props.right ? 'right' : '',
 }));
 
-export default class GameWrapper extends Component {
+Button.propTypes = {
+  hollow: PropTypes.bool,
+  right: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  hollow: false,
+  right: false,
+};
+
+class GameWrapper extends Component {
   constructor(props) {
     super(props);
 
@@ -73,7 +84,7 @@ export default class GameWrapper extends Component {
     this.onStop = this.onStop.bind(this);
     this.stop = this.stop.bind(this);
     this.win = this.win.bind(this);
-    this.loose = this.loose.bind(this);
+    this.lose = this.lose.bind(this);
     this.getEndTime = this.getEndTime.bind(this);
   }
   onStop() {
@@ -87,8 +98,8 @@ export default class GameWrapper extends Component {
     this.setState(() => ({ type: 'win', stop: true }));
     this.onStop();
   }
-  loose() {
-    this.setState(() => ({ type: 'loose', stop: true }));
+  lose() {
+    this.setState(() => ({ type: 'lose', stop: true }));
     this.onStop();
   }
   getEndTime(time) {
@@ -96,7 +107,7 @@ export default class GameWrapper extends Component {
   }
   render() {
     const texts = {
-      loose: (
+      lose: (
         <div>
           <h1>Lost <Fa name="frown-o" /> </h1>
           <p>Wanna retry?</p>
@@ -145,7 +156,7 @@ export default class GameWrapper extends Component {
           width={this.props.width}
           bombs={this.props.bombs}
           onWin={this.win}
-          onLoose={this.loose}
+          onLose={this.lose}
         />
         {this.state.showPopup ? <Blur /> : null}
         {this.state.showPopup
@@ -157,3 +168,12 @@ export default class GameWrapper extends Component {
     );
   }
 }
+
+GameWrapper.propTypes = {
+  onStop: PropTypes.func.isRequired,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  bombs: PropTypes.number,
+};
+
+export default GameWrapper;

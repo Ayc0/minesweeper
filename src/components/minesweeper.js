@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Tile from './tile';
 import Board from '../board';
 
-export default class Minesweeper extends Component {
+class Minesweeper extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +23,7 @@ export default class Minesweeper extends Component {
     this.board.reveal(x, y).then(value => {
       this.forceUpdate();
       if (value === -1) {
-        this.props.onLoose();
+        this.props.onLose();
       }
       if (this.board.allRevealed) {
         this.props.onWin();
@@ -33,7 +34,7 @@ export default class Minesweeper extends Component {
     this.board.revealCircleSecure(x, y).then(bomb => {
       this.forceUpdate();
       if (bomb) {
-        this.props.onLoose();
+        this.props.onLose();
       }
       if (this.board.allRevealed) {
         this.props.onWin();
@@ -87,3 +88,13 @@ export default class Minesweeper extends Component {
     );
   }
 }
+
+Minesweeper.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  bombs: PropTypes.number.isRequired,
+  onWin: PropTypes.func.isRequired,
+  onLose: PropTypes.func.isRequired,
+};
+
+export default Minesweeper;

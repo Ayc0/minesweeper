@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import SVG from 'svg.js';
+import PropTypes from 'prop-types';
 
 const polarToCartesian = (cx, cy, r, angleDeg) => {
   const angleRad = (angleDeg - 90) * Math.PI / 180.0;
@@ -72,7 +73,7 @@ const createProgress = (draw, size, margin, angleDeg, color, width) => {
   );
 };
 
-export default class Progress extends Component {
+class Progress extends Component {
   componentDidMount() {
     const svg = findDOMNode(this.refs.svg);
     const draw = SVG(svg).size(
@@ -116,3 +117,12 @@ export default class Progress extends Component {
     return <div ref="svg" style={{ width: '25%' }} />;
   }
 }
+
+Progress.propTypes = {
+  size: PropTypes.number.isRequired,
+  margin: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  time: PropTypes.number.isRequired,
+};
+
+export default Progress;

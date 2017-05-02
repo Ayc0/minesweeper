@@ -1,5 +1,6 @@
 import React from 'react';
 import { styled } from 'styletron-react';
+import PropTypes from 'prop-types';
 
 import Level from './level';
 
@@ -34,5 +35,9 @@ const LevelPicker = props => (
     </div>
   </Container>
 );
+
+LevelPicker.propTypes = {
+  start: PropTypes.func.isRequired,
+};
 
 export default LevelPicker;

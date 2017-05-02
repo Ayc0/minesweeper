@@ -1,3 +1,6 @@
+// Not use in the project
+// Was planned to be a rules page
+
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import SVG from 'svg.js';

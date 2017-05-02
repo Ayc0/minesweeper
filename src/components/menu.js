@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { styled } from 'styletron-react';
 import FA from 'react-fontawesome';
+import PropTypes from 'prop-types';
 
 import Progress from './progress';
 
@@ -23,7 +24,7 @@ const Fa = styled(FA, () => ({
   width: '50%',
 }));
 
-export default class Menu extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
 
@@ -73,3 +74,11 @@ export default class Menu extends Component {
     );
   }
 }
+
+Menu.propTypes = {
+  stop: PropTypes.bool.isRequired,
+  getEndTime: PropTypes.func.isRequired,
+  onStop: PropTypes.func.isRequired,
+};
+
+export default Menu;

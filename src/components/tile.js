@@ -1,7 +1,6 @@
 import React from 'react';
 import { styled } from 'styletron-react';
 import Fa from 'react-fontawesome';
-
 import PropTypes from 'prop-types';
 
 const size = '20px';
@@ -19,6 +18,14 @@ const StyledTile = styled('div', props => ({
   margin: 0,
   textAlign: 'center',
 }));
+
+StyledTile.propTypes = {
+  value: PropTypes.number,
+};
+
+StyledTile.defaultProps = {
+  value: null,
+};
 
 const Tile = props => (
   <StyledTile
