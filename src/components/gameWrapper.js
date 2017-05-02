@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { styled } from 'styletron-react';
 import Fa from 'react-fontawesome';
+import Color from 'color';
 
 import Menu from './menu';
 import Minesweeper from './minesweeper';
@@ -38,15 +39,29 @@ const Popup = styled('div', () => ({
   padding: '1em',
 }));
 
+const color = Color('#5e7b3e').lighten(0.2);
+
 const Button = styled('button', props => ({
   borderRadius: '5px',
-  backgroundColor: props.hollow ? 'white' : 'grey',
-  border: '1px solid grey',
+  backgroundColor: props.hollow ? 'white' : color.hex(),
+  border: `1px solid ${color.hex()}`,
+  color: props.hollow ? color.hex() : 'white',
+  ':hover': {
+    backgroundColor: props.hollow
+      ? Color('#fff').darken(0.1).hex()
+      : color.darken(0.2).hex(),
+    borderColor: color.darken(0.2).hex(),
+    color: props.hollow
+      ? color.darken(0.2).hex()
+      : Color('#fff').darken(0.1).hex(),
+  },
   outline: 'none',
-  width: '5em',
+  width: '48%',
   fontFamily: 'Lato',
   fontSize: '16px',
   padding: '0.3em',
+  margin: '2px',
+  float: props.right ? 'right' : '',
 }));
 
 export default class GameWrapper extends Component {
@@ -85,7 +100,7 @@ export default class GameWrapper extends Component {
         <div>
           <h1>Lost <Fa name="frown-o" /> </h1>
           <p>Wanna retry?</p>
-          <Button type="button" onClick={this.props.onStop}>OK</Button>
+          <Button type="button" onClick={this.props.onStop} right>OK</Button>
         </div>
       ),
       win: (
@@ -97,14 +112,14 @@ export default class GameWrapper extends Component {
             {this.state.time % 60}s.
           </p>
           <p>Wanna beat your score?</p>
-          <Button type="button" onClick={this.props.onStop}>OK</Button>
+          <Button type="button" onClick={this.props.onStop} right>OK</Button>
         </div>
       ),
       stop: (
         <div>
           <h1>Quit <Fa name="meh-o" /> </h1>
           <p>Why leaving now?</p>
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
             <Button type="button" hollow onClick={this.props.onStop}>
               Quit
             </Button>
