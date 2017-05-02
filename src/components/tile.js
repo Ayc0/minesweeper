@@ -13,7 +13,8 @@ const StyledTile = styled('div', props => ({
   // backgroundColor: checkClickable(props.value) ? '#ffe4af' : '#fff2d8',
   backgroundColor: checkClickable(props.value) ? '#e2d866' : '#e8e1a7', // e6de7d
   border: '1px solid #bcaa14',
-  color: checkClickable(props.value) ? '#7c7115' : '#9b8d1a',
+  color: checkClickable(props.value) ? '#a04c31' : '#72270e',
+  fontWeight: 'bold',
   padding: 0,
   margin: 0,
   textAlign: 'center',

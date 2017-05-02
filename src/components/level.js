@@ -112,19 +112,19 @@ export default class Level extends Component {
   componentWillMount() {
     switch (this.props.level) {
       case 'easy':
-        this.backgroundColor = '#b2bc42';
+        this.backgroundColor = 'rgba(178, 188, 66, 0.87)';
         this.setState(() => ({ width: 9, height: 9, bombs: 10 }));
         break;
       case 'medium':
-        this.backgroundColor = '#5e7b3e';
+        this.backgroundColor = 'rgba(94, 123, 62, 0.87)';
         this.setState(() => ({ width: 16, height: 16, bombs: 40 }));
         break;
       case 'hard':
-        this.backgroundColor = '#797948';
+        this.backgroundColor = 'rgba(121, 121, 72, 0.87)';
         this.setState(() => ({ width: 16, height: 30, bombs: 99 }));
         break;
       case 'custom':
-        this.backgroundColor = '#d3b670';
+        this.backgroundColor = 'rgba(211, 182, 112, 0.87)';
         this.setState(() => ({ width: 16, height: 16, bombs: 1 }));
         break;
       default:

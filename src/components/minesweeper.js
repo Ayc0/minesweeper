@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
-import { styled } from 'styletron-react';
 
 import Tile from './tile';
 import Board from '../board';
-
-const Container = styled('div', () => ({
-  position: 'absolute',
-  left: '50vw',
-  top: '50vh',
-  transform: 'translate(-50%, -50%)',
-}));
 
 export default class Minesweeper extends Component {
   constructor(props) {
@@ -78,9 +70,9 @@ export default class Minesweeper extends Component {
       );
     });
     return (
-      <Container>
+      <div>
         {displayBoard}
-      </Container>
+      </div>
     );
   }
 }

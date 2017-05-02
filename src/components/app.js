@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import LevelPicker from './levelPicker';
-import Minesweeper from './minesweeper';
+import GameWrapper from './gameWrapper';
 
 import './app.css';
 
@@ -36,13 +36,13 @@ class App extends Component {
           transitionLeaveTimeout={500}
         >
           {this.state.start
-            ? <Minesweeper
+            ? <GameWrapper
                 height={this.state.height}
                 width={this.state.width}
                 bombs={this.state.bombs}
                 onWin={this.onWin}
                 onLoose={this.onLoose}
-                key="minesweeper"
+                key="gameWrapper"
               />
             : <LevelPicker
                 start={(width, height, bombs) =>
