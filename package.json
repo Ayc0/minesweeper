@@ -2,7 +2,7 @@
   "name": "Demineur",
   "version": "0.1.0",
   "private": true,
-  "homepage": "minesweeper",
+  "homepage": "/minesweeper",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && rm -rf docs && mv build docs",
