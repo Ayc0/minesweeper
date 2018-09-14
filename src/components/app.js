@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import LevelPicker from './levelPicker';
 import GameWrapper from './gameWrapper';
 
@@ -29,24 +29,27 @@ class App extends Component {
           transitionEnterTimeout={750}
           transitionLeaveTimeout={500}
         >
-          {this.state.start
-            ? <GameWrapper
-                height={this.state.height}
-                width={this.state.width}
-                bombs={this.state.bombs}
-                onStop={this.onStop}
-                key="gameWrapper"
-              />
-            : <LevelPicker
-                start={(width, height, bombs) =>
-                  this.setState(() => ({
-                    start: true,
-                    height,
-                    width,
-                    bombs,
-                  }))}
-                key="levelPicker"
-              />}
+          {this.state.start ? (
+            <GameWrapper
+              height={this.state.height}
+              width={this.state.width}
+              bombs={this.state.bombs}
+              onStop={this.onStop}
+              key="gameWrapper"
+            />
+          ) : (
+            <LevelPicker
+              start={(width, height, bombs) =>
+                this.setState(() => ({
+                  start: true,
+                  height,
+                  width,
+                  bombs,
+                }))
+              }
+              key="levelPicker"
+            />
+          )}
         </ReactCSSTransitionGroup>
       </div>
     );
