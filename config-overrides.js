@@ -6,7 +6,7 @@ module.exports = {
   webpack: (config, env) => {
     if (env === 'production') {
       config.output.publicPath = '/minesweeper/';
-      config.output.path = path.resolve(__dirname, 'build');
+      config.output.path = path.resolve(__dirname, 'docs');
     }
     return config;
   },
